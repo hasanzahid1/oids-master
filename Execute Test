@@ -1,0 +1,79 @@
+          OID App Execute Test
+
+Prerequisites
+Download/clone the oids-master 
+
+Building and Deploying
+Follow the Instructions provided in oids-master/README.md for building/deploying the application.
+
+Running
+After building/deploying, run the helper script to launch the application.
+
+$Open com/bouff/oids/OidAppTester.java doTest() change the ProcessBuilder path pointing to oids-master/bin/oid.sh
+
+
+
+To Execute Test Cases Run com/bouff/oids/executeTestCase.java 
+To Execute Basic Performance Test Run com/bouff/oids/executePerformanceTest.java
+
+=================================================================================================
+
+To execute Automation Test against the running CLI application, 
+made use of ProcessBuilder classs such that arguments can be read and write against a running CLI applicaton.
+
+Steps used to execute the Test:
+1 Start the process using ProcessBuilder.
+2 Build Test Set using hashmap with SNMP trap, expected output.
+3 Pass the Test Set using getOutputStream and Read the result
+4 if the result matches with expected result the test pass else fail
+
+Example Test Cases:
+
+1: OID is EXACT MATCH WITH PREFIX
+expectedOutput.put(".1.3.6.1.2.1.10.32.0.1", "true");
+
+Testing value: ".1.3.6.1.2.1.10.32.0.1"
+Recieved from application: ".1.3.6.1.2.1.10.32.0.1: true"
+Test passed for: .1.3.6.1.2.1.10.32.0.1
+
+2:  OID is PREFIX + VALID INPUT
+expectedOutput.put(".1.3.6.1.2.1.10.32.0.1.0.0.0.0.0", "true");
+
+Testing value: ".1.3.6.1.2.1.10.32.0.1.0.0.0.0.0"
+Recieved from application: ".1.3.6.1.2.1.10.32.0.1.0.0.0.0.0: true"
+Test passed for: .1.3.6.1.2.1.10.32.0.1.0.0.0.0.0
+
+Bugs Found During Tests
+
+Defect 1: When space is passed, the expected output should be invalid. But the application throws exception.
+
+Ex :
+Testing value: " .1.3.6.1.6.3.1.1.5"
+Recieved from application: "Exiting. Exception: For input string: " 1""
+Test failed for:  .1.3.6.1.6.3.1.1.5
+Exception thrown. currectEntry: " .1.3.6.1.6.3.1.1.5"
+
+Defect 2: When Max Java integer value or grater is passed soon after valid SNMP prefix, the application throws exception.
+
+Ex:
+Testing value: ".1.3.6.1.6.3.1.1.5.534532452345"
+Recieved from application: "Exiting. Exception: For input string: "534532452345""
+Test failed for: .1.3.6.1.6.3.1.1.5.534532452345
+Exception thrown. currectEntry: ".1.3.6.1.6.3.1.1.5.534532452345"
+
+Note: if max integer value is passed after valid prefix + single number it does not throw exception.
+.1.3.6.1.6.3.1.1.5.5.534532452345 this value does not throw error but .1.3.6.1.6.3.1.1.5.534532452345 throws exception.
+
+Defect 3: When passing Java escape chars for a valid SNMP it gives Invalid Response. Since this is Java Application, it should be able to take escape chars.
+
+
+Performance Test:
+
+Executed Total Testcase = 16+ 24 + 13 = 53 ; for 100 times-  Executing 53 * 100 = 5300 tests in 80 secs
+Running 5300 extries takes 80 secs, thus performance could be improved.
+
+
+
+
+
+
