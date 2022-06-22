@@ -9,8 +9,7 @@ Follow the Instructions provided in oids-master/README.md for building/deploying
 Running
 After building/deploying, run the helper script to launch the application.
 
-$Open com/bouff/oids/OidAppTester.java doTest() change the ProcessBuilder path pointing to oids-master/bin/oid.sh
-
+$Open com/bouff/oids/OidAppTester.java doTest() change the ProcessBuilder complete path to oids-master/bin/oid.sh
 
 
 To Execute Test Cases Run com/bouff/oids/executeTestCase.java 
