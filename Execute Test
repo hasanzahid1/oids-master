@@ -1,4 +1,4 @@
-          OID App Execute Test
+#OID App Execute Test
 
 Prerequisites
 Download/clone the oids-master 
@@ -17,14 +17,16 @@ To Execute Basic Performance Test Run com/bouff/oids/executePerformanceTest.java
 
 =================================================================================================
 
-To execute Automation Test against the running CLI application, 
-made use of ProcessBuilder classs such that arguments can be read and write against a running CLI applicaton.
-
 Steps used to execute the Test:
-1 Start the process using ProcessBuilder.
-2 Build Test Set using hashmap with SNMP trap, expected output.
-3 Pass the Test Set using getOutputStream and Read the result
-4 if the result matches with expected result the test pass else fail
+
+Made Use of This ProcessBuilder class, it is used to create operating system processes.
+Each ProcessBuilder instance manages a collection of process attributes using which handling input and output streams of a process can be achieved.
+
+1 Start application with ProcessBuilder.
+2 ProcessBuilder class provides additional control over the nature of the process built to run commands to Runtime class.
+3 Build Test Set using hashmap with SNMP trap, expected output.
+4 Pass the Test Set using getOutputStream and Read the result using getInputStream .
+5 if the result matches with expected result the test pass else fail.
 
 Example Test Cases:
 
